@@ -12,6 +12,6 @@ namespace ProyectoWeb_24AM_2023.Models.Entities
         [Required]
         public string Descripcion { get; set; }
         [Required]
-        public decimal Precio { get; set; } 
+        public double Precio { get; set; } 
     }
 }

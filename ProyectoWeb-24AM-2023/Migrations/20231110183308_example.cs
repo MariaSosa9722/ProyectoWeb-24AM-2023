@@ -13,6 +13,21 @@ namespace ProyectoWeb_24AM_2023.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Articulos",
+                columns: table => new
+                {
+                    PkArticulo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Precio = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articulos", x => x.PkArticulo);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Libros",
                 columns: table => new
                 {
@@ -49,7 +64,7 @@ namespace ProyectoWeb_24AM_2023.Migrations
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FkRol = table.Column<int>(type: "int", nullable: false)
+                    FkRol = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,8 +73,7 @@ namespace ProyectoWeb_24AM_2023.Migrations
                         name: "FK_Usuarios_Roles_FkRol",
                         column: x => x.FkRol,
                         principalTable: "Roles",
-                        principalColumn: "PkRoles",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PkRoles");
                 });
 
             migrationBuilder.InsertData(
@@ -85,6 +99,9 @@ namespace ProyectoWeb_24AM_2023.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Articulos");
+
             migrationBuilder.DropTable(
                 name: "Libros");
 
