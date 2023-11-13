@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoWeb_24AM_2023.Models.Entities.Articulo>
 
 @{
-    
+
     Layout = "_LayoutDashboard";
 }
 
@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="offset-10 col-4 mb-4">
-        <a asp-action="" asp-controller="" class="btn-success mx-auto btn-lg"> <i class="fa-solid fa-user"></i>Nuevo</a>
+        <a asp-action="Crear" asp-controller="Articulo" class="btn-success mx-auto btn-lg"> Nuevo</a>
     </div>
 </div>
 
@@ -32,26 +32,34 @@
                         <table class="table table-bordered" id="tblArticulo" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                  
+                                    <th>#</th>
                                     <th> @Html.DisplayNameFor(x => x. Nombre)</th>
                                     <th> @Html.DisplayNameFor(x => x.Descripcion )</th>
                                     <th> @Html.DisplayNameFor(x => x.Precio )</th>
-                                
+
                                     <th> Acciones</th>
                                 </tr>
 
                             </thead>
                             <tbody>
-                              
+
+                                @{
+                                    int i = 1;
+                                }
+
+
                                 @foreach (var Item in Model)
                                 {
                                     <tr>
+                                        <td>  <span>@(i++)</span></td>
 
                                         <td> @Html.DisplayFor(x => Item.Nombre )</td>
                                         <td> @Html.DisplayFor(x => Item.Descripcion )</td>
                                         <td> @Html.DisplayFor(x => Item.Precio) </td>
                                         <td>
-                                            @*Agregar botones de boostrap *@
+
+                                            <a class=" btn btn-warning" asp-route-id=@Item.PkArticulo> <i class="fa-regular fa-pen-to-square"></i> Editar</a>
+                                            <a class=" btn btn-danger eliminar-articulo" data-id="@Item.PkArticulo"><i class="fa-solid fa-trash"></i>  Eliminar</a>
                                         </td>
                                     </tr>
                                 }
@@ -101,19 +109,7 @@
                 }
             });
 
-            function GetId(id) {
 
-            }
-
-            var table = $('#tblArticulo').DataTable();
-
-
-
-            $('#tblArticulo').on('click', 'tr', function () {
-                var id = table.row(this).id();
-
-                alert('Clicked row id ' + id);
-            });
 
         });
 

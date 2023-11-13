@@ -2,6 +2,7 @@
 using ProyectoWeb_24AM_2023.Context;
 using ProyectoWeb_24AM_2023.Models.Entities;
 using ProyectoWeb_24AM_2023.Services.IServices;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ProyectoWeb_24AM_2023.Services.Service
 {
@@ -66,6 +67,35 @@ namespace ProyectoWeb_24AM_2023.Services.Service
             catch (Exception ex)
             {
                 throw new Exception("Surgio un error" + ex.Message);
+            }
+
+        }
+
+
+        public bool EliminarArticulo(int id)
+        {
+            try
+            {
+                Articulo articulo = _context.Articulos.Find(id);
+                var res = _context.Articulos.Remove(articulo);
+                _context.SaveChanges();
+
+                if (articulo != null)
+                {
+                    return true;
+
+                }
+
+                else
+                {
+                    return false;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Succedio un error " + ex.Message);
             }
 
         }

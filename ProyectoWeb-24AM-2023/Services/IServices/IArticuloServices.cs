@@ -8,5 +8,7 @@ namespace ProyectoWeb_24AM_2023.Services.IServices
         public Task<Articulo> GetByIdArticulo(int id);
 
         public Task<Articulo> CrearArticulo(Articulo i);
+
+        public bool EliminarArticulo(int id);
     }
 }

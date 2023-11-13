@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProyectoWeb_24AM_2023.Models.Entities;
 using ProyectoWeb_24AM_2023.Services.IServices;
 using ProyectoWeb_24AM_2023.Services.Service;
 
@@ -33,6 +34,22 @@ namespace ProyectoWeb_24AM_2023.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult Crear ()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Crear(Articulo request)
+        {
+            var response = _articuloServices.CrearArticulo(request);
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
 
 
 
