@@ -57,8 +57,8 @@ namespace ProyectoWeb_24AM_2023.Services.Service
                     Precio = i.Precio,
                 };
 
-                var result =  _context.Articulos.Add(request);
-                                await _context.SaveChangesAsync();
+                var result = await _context.Articulos.AddAsync(request);
+                               _context.SaveChanges();
 
                 return request;
                             
@@ -72,16 +72,42 @@ namespace ProyectoWeb_24AM_2023.Services.Service
         }
 
 
+        public async Task<Articulo> EditarArticulo(Articulo i)
+        {
+            try
+            {
+
+                Articulo articulo = _context.Articulos.Find(i.PkArticulo);
+
+                articulo.Nombre = i.Nombre;
+                articulo.Descripcion = i.Descripcion;
+                articulo.Precio = i.Precio;
+
+                _context.Entry(articulo).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return articulo;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Succedio un error " + ex.Message);
+            }
+        }
+
+
+
         public bool EliminarArticulo(int id)
         {
             try
             {
                 Articulo articulo = _context.Articulos.Find(id);
-                var res = _context.Articulos.Remove(articulo);
-                _context.SaveChanges();
+                
 
                 if (articulo != null)
                 {
+                    var res = _context.Articulos.Remove(articulo);
+                    _context.SaveChanges();
                     return true;
 
                 }

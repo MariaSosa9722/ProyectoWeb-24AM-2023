@@ -6,6 +6,7 @@ namespace ProyectoWeb_24AM_2023.Services.IServices
     {
         public Task<List<Articulo>> GetArticulos();
         public Task<Articulo> GetByIdArticulo(int id);
+        public Task<Articulo> EditarArticulo(Articulo i);
 
         public Task<Articulo> CrearArticulo(Articulo i);
 
