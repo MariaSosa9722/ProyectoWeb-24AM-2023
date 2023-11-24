@@ -63,7 +63,52 @@ namespace ProyectoWeb_24AM_2023.Services.Service
             }
 
         }
-            
+
+
+
+        public async Task<Usuario> Editar(Usuario i)
+        {
+            try
+            {
+
+                Usuario usuario = _context.Usuarios.Find(i.PKUsuario);
+
+                usuario.Nombre = i.Nombre;
+                usuario.UserName = i.UserName;
+                usuario.FkRol = i.FkRol;
+
+                _context.Entry(usuario).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return usuario;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        public async Task<Usuario> GetbyId(int id)
+        {
+            try
+            {
+                var response = await _context.Usuarios.FirstOrDefaultAsync(x => x.PKUsuario == id);
+
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Succedio un error " + ex.Message);
+            }
+
+        }
+
 
     }
 }
